@@ -5,10 +5,17 @@ import ItemList from './components/ItemList';
 
 function App() {
   const [items, setItems] = useState([]);
+  const [error, setError] = useState(null);
 
   const fetchItems = async () => {
-    const res = await getItems();
-    setItems(res.data);
+    try {
+      const res = await getItems();
+      setItems(res.data);
+      setError(null);
+    } catch (err) {
+      setError('Failed to load items: ' + err.message);
+      console.error(err);
+    }
   };
 
   useEffect(() => {
@@ -18,6 +25,7 @@ function App() {
   return (
     <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
       <h1>Item Manager</h1>
+      {error && <div style={{ color: 'red', marginBottom: '1rem' }}>Error: {error}</div>}
       <ItemForm onItemAdded={fetchItems} />
       <ItemList items={items} onRefresh={fetchItems} />
     </div>

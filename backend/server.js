@@ -6,7 +6,7 @@ require('dotenv').config();
 const app = express();
 
 app.use(cors({
-  origin: ["https://wmt-production-3c80.up.railway.app", "http://localhost:5175"],
+  origin: ["https://remarkable-biscochitos-162165.netlify.app", "https://wmt-production-3c80.up.railway.app", "http://localhost:5175"],
   credentials: true
 }));
 app.use(express.json());
@@ -17,11 +17,6 @@ mongoose.connect(process.env.MONGO_URI)
 
 const itemRoutes = require('./routes/items');
 app.use('/api/items', itemRoutes);
-
-// API root
-app.get('/api', (req, res) => {
-  res.json({ message: 'Item Manager API', endpoints: { items: '/api/items' } });
-});
 
 // Root route
 app.get('/', (req, res) => {
