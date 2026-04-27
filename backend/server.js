@@ -6,7 +6,7 @@ require('dotenv').config();
 const app = express();
 
 app.use(cors({
-  origin: "wmt-production-3c80.up.railway.app",
+  origin: ["https://wmt-production-3c80.up.railway.app", "http://localhost:5175"],
   credentials: true
 }));
 app.use(express.json());
