@@ -18,6 +18,11 @@ mongoose.connect(process.env.MONGO_URI)
 const itemRoutes = require('./routes/items');
 app.use('/api/items', itemRoutes);
 
+// API root
+app.get('/api', (req, res) => {
+  res.json({ message: 'Item Manager API', endpoints: { items: '/api/items' } });
+});
+
 // Root route
 app.get('/', (req, res) => {
   res.json({ message: 'Item Manager API is running' });
